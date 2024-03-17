@@ -4,23 +4,43 @@
       Project 08-03
 
       Project to build a pizza using object oriented programming
-      Author: 
-      Date:   
+      Author: Dan Nascimento
+      Date:   03/15/2024
 
       Filename: project08-03.js
 */
 
 /*---------------- Object Code ----------------------*/
+let cart = {
+   items: [],
+   addItem: function(foodItem) {
+      this.items.push(foodItem);
+   }
+};
 
+function Pizza() {
+   this.size = null;
+   this.crust = null;
+   this.toppings = [];
+}
 
+function Topping() {
+   this.name = null;
+   this.side = null;
+}
 
+Pizza.prototype.addToCart = function() {
+   cart.items.push(this);
+};
 
-
-
-
-
-
-
+Pizza.prototype.summarize = function() {
+   let summary = "Pizza: ";
+   summary += this.size + " " + this.crust + " ";
+   for (let i = 0; i < this.toppings.length; i++) {
+      summary += this.toppings[i].name + " (" + this.toppings[i].side + ") ";
+   }
+   return summary;
+};
 
 
 /*----------------------------- Interface Code -------------------------*/
@@ -75,17 +95,31 @@ function drawPizza() {
    }      
 }
 
-
-
 // Function to build the pizza
 function buildPizza() {
-   let checkedToppings = document.querySelectorAll("input.topping:checked"); 
-
-
-}    
+   let checkedToppings = document.querySelectorAll("input.topping:checked");
+   let myPizza = new Pizza();
+   myPizza.size = pizzaSizeBox.value;
+   myPizza.crust = pizzaCrustBox.value;
+   for (let i = 0; i < checkedToppings.length; i++) {
+      if (checkedToppings[i].value !== 'none') {
+         let myTopping = new Topping();
+         myTopping.name = checkedToppings[i].name;
+         myTopping.side = checkedToppings[i].value;
+         myPizza.toppings.push(myTopping); // instructions in the book says addTopping(myTopping) for this line but that makes no sense
+      }
+   }
+   return myPizza;
+}
 
 // Function to add the built pizza to the shopping cart
 function updateCart() {
-
-
+   let myPizza = buildPizza();
+   cart.addItem(myPizza);
+   console.log(cart);
+   let p = document.createElement('p');
+   p.textContent = myPizza.summarize(myPizza);
+   cartBox.appendChild(p);
+   clearPizzaImage();
+   clearToppings();
 }  

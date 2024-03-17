@@ -6,8 +6,8 @@
       Chapter 8
       Hands-on Project 8-3
 
-      Author: 
-      Date:   
+      Author: Dan Nascimento
+      Date:   03/15/2024
 
       Filename: project08-03.html
    -->
@@ -15,6 +15,7 @@
    <meta name="viewport" content="width=device-width,initial-scale=1.0">
    <title>Hands-on Project 8-3</title>
    <link rel="stylesheet" href="styles.css" />
+   <script src="project08-03.js" defer></script>
 </head>
 
 <body>
@@ -34,7 +35,8 @@
             <option value='14"' selected>14"</option> 
             <option value='16"'>16"</option>                                
          </select>         
-         <label for="crustBox">Pizza Crust</label>
+         <!-- 1 page error: incorrect use of label for="crustBox" -- changed to for="pizzaCrust" -->
+         <label for="pizzaCrust">Pizza Crust</label>
          <select name="pizzaCrust" id="pizzaCrust">
             <option value="thin" selected>thin</option>
             <option value="thick">thick</option>
